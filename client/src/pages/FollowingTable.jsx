@@ -17,19 +17,19 @@ const FollowingTable = ({ followings, onDelete, youtubeInfo, isLoading, error })
         <thead className="bg-gray-100">
           <tr>
             <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              平台
+              Platform
             </th>
             <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              频道用户名
+              Channel Username
             </th>
             <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              频道id
+              Channel ID
             </th>
             <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              频道名称
+              Channel Title
             </th>
             <th className="py-2 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              操作
+              Action
             </th>
           </tr>
         </thead>
@@ -49,7 +49,7 @@ const FollowingTable = ({ followings, onDelete, youtubeInfo, isLoading, error })
                     onClick={() => onDelete(following._id)}
                     className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-xs"
                   >
-                    删除
+                    Delete
                   </button>
                 </td>
               </tr>

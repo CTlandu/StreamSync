@@ -6,6 +6,8 @@ const youtube = google.youtube({
   auth: process.env.YOUTUBE_API_KEY,
 });
 
+const MAX_RESULTS_PER_REQUEST = 50;
+
 async function getChannelsDetailsByIds(channelIds) {
   console.log('Fetching details for channel IDs:', channelIds);
   const results = {};
@@ -45,15 +47,24 @@ async function getChannelsDetailsByIds(channelIds) {
         videoIds.push(...searchResponse.data.items.map((item) => item.id.videoId));
       }
 
-      // 批量获取视频详细信息
-      const videosResponse = await youtube.videos.list({
-        part: 'snippet',
-        id: videoIds.join(','),
-      });
+      // 分批获取视频详细信息
+      const chunkedVideoIds = [];
+      for (let i = 0; i < videoIds.length; i += MAX_RESULTS_PER_REQUEST) {
+        chunkedVideoIds.push(videoIds.slice(i, i + MAX_RESULTS_PER_REQUEST));
+      }
+
+      const allVideosData = [];
+      for (const chunk of chunkedVideoIds) {
+        const videosResponse = await youtube.videos.list({
+          part: 'snippet',
+          id: chunk.join(','),
+        });
+        allVideosData.push(...videosResponse.data.items);
+      }
 
       // 处理获取到的数据
       for (const channel of channelsResponse.data.items) {
-        const channelVideos = videosResponse.data.items.filter(
+        const channelVideos = allVideosData.filter(
           (video) => video.snippet.channelId === channel.id
         );
         const videos = channelVideos.map((video) => ({

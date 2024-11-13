@@ -19,7 +19,7 @@ const VideoItem = ({ video }) => (
     <div>
       <p className="font-medium text-sm">{video.video_title}</p>
       <p className="text-xs text-gray-500">
-        发布时间: {new Date(video.published_at).toLocaleDateString()}
+        Published Date: {new Date(video.published_at).toLocaleDateString()}
       </p>
     </div>
   </div>
@@ -47,12 +47,12 @@ const YouTubeInformation = ({ channelInfo }) => {
         />
         <div>
           <h3 className="text-xl font-bold">{channel_title}</h3>
-          <p className="text-gray-600">订阅数: {formatNumber(subscribers)}</p>
-          <p className="text-gray-600">视频数: {formatNumber(video_count)}</p>
+          <p className="text-gray-600">Subscribers: {formatNumber(subscribers)}</p>
+          <p className="text-gray-600">#Videos: {formatNumber(video_count)}</p>
         </div>
       </div>
       <div className="recent-videos p-4">
-        <h4 className="text-lg font-semibold mb-2">最新视频:</h4>
+        <h4 className="text-lg font-semibold mb-2">Latest Videos:</h4>
         {displayVideos && displayVideos.length > 0 ? (
           displayVideos.map((video) => <VideoItem key={video.video_id} video={video} />)
         ) : (
