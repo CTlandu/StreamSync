@@ -83,7 +83,7 @@ const FollowingPage = () => {
       creator: 'William and Mary',
       platform: 'youtube',
       priority: 2,
-      timeAgo: '7 hours ago',
+      timeAgo: '20 minutes ago',
       thumbnail: 'https://placeholder.com/150x100',
       title:
         'This year, we are celebrating the 400th anniversary of the founding of the College of William and Mary...',
@@ -94,7 +94,7 @@ const FollowingPage = () => {
       platform: 'twitter',
       priority: 1,
       avatar: 'https://placeholder.com/150',
-      timeAgo: '21 hours ago',
+      timeAgo: '1 minute ago',
       thumbnail: 'https://placeholder.com/300x200',
       title: 'Breaking news: Latest updates from SpaceX...',
     },
