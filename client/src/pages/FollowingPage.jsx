@@ -68,8 +68,7 @@ const ContentCard = ({ content }) => {
 };
 
 const FollowingPage = () => {
-  // 更新模拟数据
-  const [contents] = useState([
+  const [contents, setContents] = useState([
     {
       creator: 'PlayStation',
       platform: 'instagram',
@@ -100,6 +99,28 @@ const FollowingPage = () => {
       title: 'Breaking news: Latest updates from SpaceX...',
     },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const handleLoadMore = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newContents = [
+        {
+          creator: 'New Creator',
+          platform: 'youtube',
+          priority: 2,
+          timeAgo: '1 hour ago',
+          thumbnail: 'https://placeholder.com/150x100',
+          title: 'New interesting content...',
+          duration: '5:30',
+        },
+      ];
+
+      setContents((prevContents) => [...prevContents, ...newContents]);
+      setIsLoading(false);
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -113,6 +134,25 @@ const FollowingPage = () => {
               {contents.map((content, index) => (
                 <ContentCard key={index} content={content} />
               ))}
+
+              {hasMore && (
+                <div className="flex justify-center mt-6 mb-8">
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={isLoading}
+                    className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 disabled:bg-blue-300 flex items-center space-x-2"
+                  >
+                    {isLoading ? (
+                      <>
+                        <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                        <span>Loading...</span>
+                      </>
+                    ) : (
+                      <span>Load More</span>
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
           </main>
         </div>
