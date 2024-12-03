@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: streamsync-frontend
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://streamsync-backend.onrender.com
+
+  - type: web
+    name: streamsync-backend
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && node index.js
+    envVars:
+      - key: MONGODB_URI
+        value: your_mongodb_uri
+      - key: YOUTUBE_API_KEY
+        value: your_youtube_api_key
+      - key: CLIENT_URL
+        value: https://streamsync-frontend.onrender.com

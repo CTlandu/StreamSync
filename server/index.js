@@ -11,7 +11,12 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    credentials: true,
+  })
+);
 /**
  * Helmet
 helmet() 是一个安全中间件，它通过设置各种 HTTP 头来帮助保护你的 Express 应用。它：
